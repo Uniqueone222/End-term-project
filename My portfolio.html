@@ -7,56 +7,116 @@
     <title>My Portfolio</title>
     <style>
         body {
-            background-color: #22181C;
+            background-color: #182123;
         }
-        nav{
+
+        nav {
             display: flex;
             justify-content: end;
             gap: 20px;
-        }
-        nav a{
-            color: white;
-        }
-        .Intro {
-            width: 100%;
-            height: 400px;
-            background-color: #B9BAA3;
-            color: white;
-            display: flex;
-            flex-wrap: wrap;
-
+            padding-right: 20px;
+            position: sticky;
+            top: 0px;
+            background-color: #182123;
         }
 
-        .About {
-            width: 100%;
-            height: 400px;
-            background-color: #D9D5C9;
-            color: white;
+        nav a {
+            color:white;
+            text-decoration: none;
         }
 
-        .Skills {
-            width: 100%;
-            height: 400px;
-            background-color: #B9BAA3;
-            color: white;
-        }
-
-        .Contact {
-            width: 100%;
-            height: 400px;
-            background-color: #D9D5C9;
-            color: white;
-        }
+        /*Main Section*/
 
         .container {
             display: flex;
-            flex-wrap: wrap;
+            flex-direction: column;
             margin: 0px;
+        }
+
+
+
+        /*Intro Section*/
+
+
+        .Intro {
+            width: auto;
+            height: auto;
+            padding: 50px;
+            background-color: #B9BAA3;
+            color: #7f7eff;
         }
 
         h1 {
             text-align: center;
-            width: 90%;
+            width: auto;
+            color: #7f7eff;
+            grid-area: head;
+        }
+
+        .int{
+            width: 60%;
+            grid-area: txt;
+            font-size: 35px;
+        }
+
+        img {
+            width: 300px;
+            height: 300px;
+        }
+
+        .img {
+            grid-area: img;
+            align-items: center;
+            place-content: center;
+        }
+
+        .main1{
+            display: flex;
+            justify-content: space-around;
+        }
+        @media(max-width:855px){
+            .main1{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+            .int{
+                font-size: 20px;
+                text-align: center;
+            }
+        }
+
+        /*About Section*/
+
+
+
+        .About {
+            width: auto;
+            height: auto;
+            background-color: #D9D5C9;
+            color: #7f7eff;
+            padding: 50px;
+        }
+
+        /*Skills section*/
+
+        .Skills {
+            width: auto;
+            height: auto;
+            background-color: #B9BAA3;
+            color: #7f7eff;
+            padding: 50px;
+        }
+
+
+        /*Contact Section*/
+
+        .Contact {
+            width: auto;
+            height: auto;
+            background-color: #D9D5C9;
+            color: #7f7eff;
+            padding: 50px;
         }
     </style>
 </head>
@@ -71,20 +131,13 @@
     <div class="container">
         <div class="Intro">
             <h1>Who am I?</h1>
-            <p class="text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fugiat dolore aliquam voluptas
-                atque, quasi, iusto accusamus mollitia dolorem harum, corrupti officia ipsa. Eveniet ea voluptate
-                dolores ad incidunt recusandae facilis reprehenderit molestias fugit sit maxime deserunt, est, modi
-                explicabo! Velit amet iste provident at repudiandae similique perspiciatis natus id rerum assumenda,
-                atque corrupti reiciendis aliquid a mollitia laboriosam ad et expedita modi. Porro inventore excepturi
-                voluptas ad, delectus reprehenderit perspiciatis consequuntur deleniti dolores dolorum consectetur
-                officiis quibusdam nulla quos, accusamus ducimus fugiat facilis consequatur! Voluptate, sapiente optio,
-                eaque eligendi cum vel expedita dolore porro, architecto obcaecati commodi consequuntur fuga!
-                Cupiditate.</p>
-            <div class="img"><img src="#" alt="My Photo"></div>
+            <div class="main1"><p class="int">I’m <b>Eklavya Agrawal</b>, a Front-End Developer, specializing in creating structured websites.
+                I build efficient, user-focused solutions with clean code and modern technologies.</p>
+            <div class="img"><img src="Images/My_image.jpg" alt="My Photo"></div></div>
         </div>
         <div class="About">
             <h1>About Me</h1>
-            <p></p>
+            <p class="abt"></p>
         </div>
         <div class="Skills">
             <h1>What can I do?</h1>
