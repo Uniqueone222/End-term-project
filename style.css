@@ -108,7 +108,7 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             grid-template-rows:  1fr 1fr;
-            gap: 5px;
+            gap: 30px;
         }
 
         .boxes{
@@ -121,6 +121,9 @@
         .boxes:hover{
             box-shadow: #028090 8px 4px 4px 4px;
             color: #028090;
+            transition: 1s;
+            transform: scale(1.1);
+            translate: 0px,5px,0px;
         }
 
         .boxes img{
@@ -211,6 +214,8 @@
             
         }
 
+
+
         /*Footer Section*/
         footer{
             display: flex;
@@ -227,6 +232,9 @@
             height: 40px;
         }
 
+
+
+        
         /*Media Queiries*/
 
         @media(max-width:855px) {
