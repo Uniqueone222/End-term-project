@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio</title>
+    <link href="style.css" >
+    <style>
+        
+        body {
+            background-color: #182123;
+            
+        }
+
+        nav {
+            display: flex;
+            justify-content: end;
+            gap: 20px;
+            padding-right: 20px;
+            position: sticky;
+            top: 0px;
+            background-color: #182123;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+        }
+
+        /*Main Section*/
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            margin: 0px;
+        }
+
+
+
+        /*Intro Section*/
+
+
+        .Intro {
+            width: auto;
+            height: auto;
+            padding: 50px;
+            background-color: #B9BAA3;
+            color: #182123;
+            font-size: 30px;
+            margin: 10px;
+        }
+
+        #int{
+            text-align: center;
+            width: auto;
+            color: #182123;
+        }
+
+        .int {
+            width: 60%;
+            grid-area: txt;
+            
+        }
+
+        img {
+            width: 300px;
+            height: 300px;
+        }
+
+        .img {
+            align-items: center;
+            place-content: center;
+        }
+
+        .main1 {
+            display: flex;
+            justify-content: space-around;
+        }
+
+        @media(max-width:855px) {
+            .main1 {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .int {
+                font-size: 20px;
+                text-align: center;
+            }
+            
+            .Contact{
+                flex-wrap: wrap;
+            }
+            #Smile{
+                
+                text-align: center;
+            }
+        }
+
+
+
+
+        /*About Section*/
+
+        .About {
+            width: auto;
+            height: auto;
+            background-color: #D9D5C9;
+            color: #182123;
+            padding: 50px;
+            font-size: 25px;
+            margin: 10px;
+        }
+
+
+
+
+        /*Skills section*/
+
+        .Skills {
+            width: auto;
+            height: auto;
+            background-color: #B9BAA3;
+            color: #182123;
+            padding: 50px;
+            margin-bottom: 10px;
+            margin-left: 10px;
+            margin-right: 10px;
+            font-size: 25px;
+            color:white ;
+            
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows:  1fr 1fr;
+        }
+        .boxes{
+            padding: 5px;
+            margin: 5px;
+            background-color: #182123;
+            border-radius: 5%;
+        }
+        .boxes img{
+            width: 100%;
+            height: 300px;
+            border-radius: 5%;
+        }
+        #Projects{
+            background-color:#B9BAA3;
+            text-align: center;
+            margin-bottom: 0px;
+            margin-left: 10px;
+            margin-right: 10px;
+            font-size: 50px;
+            padding-top: 20px;
+        }
+
+
+
+        /*Contact Section*/
+
+        .Contact {
+            width: auto;
+            height: auto;
+            background-color: #D9D5C9;
+            color: #182123;
+            padding: 50px;
+            margin-bottom: 10px;
+            margin-left: 10px;
+            margin-right: 10px;
+            display: flex;
+            
+            font-size:25px ;
+            justify-content: space-evenly;
+
+        }
+        #Contact{
+            background-color:#D9D5C9;
+            text-align: center;
+            margin-bottom: 0px;
+            margin-left: 10px;
+            margin-right: 10px;
+            font-size: 50px;
+            padding-top: 20px;
+        }
+        label {
+            font-size: 25px;      
+            font-weight: bold;    
+            margin-right: 10px;   
+        }
+        input, textarea{
+            width: 300px;           
+            height: 40px;           
+            padding: 10px;          
+            font-size: 16px;        
+            border: 2px solid #182123; 
+            border-radius: 15px;    
+            outline: none;          
+        }
+        textarea{
+            height: 120px;
+        }
+        input:focus {
+            border-color: #007BFF;  
+        }
+        button {
+            background-color: #182123;
+            color: white;
+            font-size: 25px;        
+            padding: 14px;          
+            border: none;
+            border-radius: 25px;    
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background-color: #182123;
+            transform: scale(1.05); 
+            
+        }
+
+        /*Footer Section*/
+
+
+        footer p{
+            color: white;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <a href="">Home</a>
+        <a href="">About Me</a>
+        <a href="">Resume</a>
+        <a href="">Connect</a>
+    </nav>
+    <div class="container">
+        <div class="Intro">
+            <h1 id="int">Who am I?</h1>
+            <div class="main1">
+                <p class="int">👋 I’m <b>Eklavya Agrawal</b>.<br>
+                    💻 A Front-End Developer 🎨, specializing in creating structured websites 🌐.<br>
+                    ⚡ I build efficient ⚙️, user-focused 👥 solutions with clean code 🧑‍💻 and modern technologies 🚀.
+                </p>
+                <div class="img"><img src="Images/My_image.jpg" alt="My Photo"></div>
+            </div>
+        </div>
+        <div class="About">
+            <h1>About Me</h1>
+            <p class="abt">👋 Hi there! I’m originally from Rajasthan 🏜️ and currently pursuing my studies at Scaler
+                School of Technology 🎓 in Bangalore 🌆.<br><br>
+
+                💻 I’ve built a foundation in Java ☕, Python 🐍, HTML 🌐, and CSS 🎨, and I’m always eager to keep
+                learning 📚 and improving 🛠️.<br><br>
+
+                ✨🔥 What excites me the most is the idea of bringing together Artificial Intelligence 🤖 and Game
+                Development 🎮. I love the thought of building interactive ✨, intelligent 🧠, and creative 🎨
+                experiences that go beyond just gameplay 🚀🎯.<br><br>
+
+                🌱 Outside of coding, I’m always curious 🔍, experimenting 🧪, and exploring new ways to grow both
+                technically and creatively 🌟.</p>
+        </div>
+        <h1 id="Projects">My Works</h1>
+        <div class="Skills">
+            
+            <div class="boxes">
+                <img src="Images/OPENCV.png" alt="NooOOO! My project">
+                <b><p>I made hand gesture control for Subway Surfers using Open Cv! Playing Subway Surfers with Keyboard is so lame....</p></b>
+            </div>
+            <div class="boxes">
+                <img src="Images/Tank Game.jpeg" alt="NooOOO! My project">
+                <b><p>Made a small 2D Tank Game that you can't win without risking something!<br>God of Wins demands Sacrifices!</p></b>
+            </div>
+            <div class="boxes">
+                <img src="Images/Mobile web design.jpeg" alt="NooOOO! My project">
+                <b><p>I can  make a lot of different types of websites like this suitable for all platforms and fill them pretty print.</p></b>
+            </div>
+            <div class="boxes">
+                <img alt="NooOOO! My project" src="Images/Learn.png">
+                <b><p>Hey hang on I am still learning! Get in touch with me to see my future projects!</p></b>
+            </div>
+        </div>
+        <h1 id="Contact">Get in Touch</h1>
+        <div class="Contact">
+            <div  id="Smile">
+                <h1>Let's Build Something Amazing</h1>
+                <p>I'm always interested in new opportunities and exciting projects. 
+                Whether you have a question or just want to say hi, feel free to reach out!</p>
+                <img alt="Just a Smile" src="Images/Smile.jpeg">
+            </div>
+            <form action="mailto:eklavya.25bcs@sst.scaler.com@example.com" method="POST" enctype="text/plain">
+                <label for="Name">Your Name</label><br>
+                <input id="Name" placeholder="Enter you Name"><br><br>
+                <label for="email">Your Email</label><br>
+                <input type="email" id="email" placeholder="Enter your Email"><br><br>
+                <label for="message" >Any message for Me?</label><br>
+                <textarea placeholder="Enter your message"></textarea><br><br>
+                <button type="submit">Send Email</button>
+            </form>
+        </div>
+        <footer>
+            <p>© 2025 Eklavya Agrawal. Crafted with 💙 and lots of ☕</p>
+            <p>Made with Pure HTML & CSS</p>
+        </footer>
+    </div>
+</body>
+
+</html>
