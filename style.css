@@ -50,8 +50,6 @@
 
         .int {
             width: 60%;
-            grid-area: txt;
-            
         }
 
         img {
@@ -120,8 +118,8 @@
 
         .boxes:hover{
             box-shadow: #028090 8px 4px 4px 4px;
-            color: #028090;
-            transition: 1s;
+            
+            transition: 0.5s;
             transform: scale(1.1);
             translate: 0px,5px,0px;
         }
@@ -183,7 +181,7 @@
             margin-right: 10px;   
         }
         input, textarea{
-            width: 300px;           
+            width: 100%;           
             height: 40px;           
             padding: 10px;          
             font-size: 16px;        
@@ -237,7 +235,7 @@
         
         /*Media Queiries*/
 
-        @media(max-width:855px) {
+        @media screen and (max-width:855px) and (min-width:430px){
             .main1 {
                 display: flex;
                 flex-direction: column;
@@ -248,8 +246,52 @@
                 font-size: 24px;
                 text-align: center;
             }
+
+            .Skills{
+                display: flex;
+                flex-wrap: wrap;
+            }
+            label{
+                font-size: 20px;
+            }
+            button{
+                font-size: 20px;
+                padding: 10px;
+            }
             
             .Contact{
                 flex-wrap: wrap;
+                font-size: 20px;
+            }
+        }
+        @media screen and (max-width:429px){
+            .main1 {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .int {
+                font-size: 24px;
+                text-align: center;
+            }
+
+            .Skills{
+                display: flex;
+                flex-wrap: wrap;
+            }
+            
+            .Contact{
+                display: flex;
+                flex-wrap: wrap;
+                text-wrap: wrap;
+                font-size: 15px;
+            }
+            label{
+                font-size: 15px;
+            }
+            button{
+                font-size: 15px;
+                padding: 7px;
             }
         }
