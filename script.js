@@ -3,13 +3,14 @@ let moves = 0;
 
 const puzzleBoard = document.getElementById("puzzleBoard");
 const startBtn = document.getElementById("startBtn");
+const resetBtn = document.getElementById("resetBtn");
 const difficultySelect = document.getElementById("difficulty");
 
 let size = 3;        
 let puzzle = [];     
 function renderPuzzle() {
     puzzleBoard.innerHTML = "";
-    puzzleBoard.style.gridTemplateColumns = `repeat(${size}, 70px)`;
+    puzzleBoard.style.gridTemplateColumns = `repeat(${size}, 90px)`;
     puzzle.forEach((value, index) => {
         const tile = document.createElement("div");
         tile.classList.add("tile");
@@ -80,6 +81,14 @@ startBtn.addEventListener("click", () => {
     shufflePuzzle();
     renderPuzzle();
 });
+resetBtn.addEventListener("click", () => {
+    moves = 0;
+    moveCountEl.textContent = moves;
+    size = parseInt(difficultySelect.value);
+    puzzle = createSolvedPuzzle(size);
+    shufflePuzzle();
+    renderPuzzle();
+});
 
 
 function canMove(tileIndex, emptyIndex) {
@@ -101,7 +110,7 @@ function swapTiles(tileIndex, emptyIndex) {
 }
 function renderPuzzle() {
     puzzleBoard.innerHTML = "";
-    puzzleBoard.style.gridTemplateColumns = `repeat(${size}, 70px)`;
+    puzzleBoard.style.gridTemplateColumns = `repeat(${size}, 90px)`;
 
     puzzle.forEach((value, index) => {
         const tile = document.createElement("div");
@@ -155,5 +164,9 @@ function isPuzzleSolved() {
 }
 function handleWin() {
     document.getElementById("status").textContent = "Solved!";
-    alert(`Puzzle solved in ${moves} moves!`);
+    setTimeout( () => {
+        alert(`Puzzle solved in ${moves} moves!`);
+    },100)
+
+    
 }
