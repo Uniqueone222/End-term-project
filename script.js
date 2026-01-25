@@ -64,6 +64,7 @@ updateGameHistoryDisplay();
 // ===== GAME LOGIC =====
 const moveCountEl = document.getElementById("moveCount");
 let moves = 0;
+let gameStarted = false;
 
 const puzzleBoard = document.getElementById("puzzleBoard");
 const startBtn = document.getElementById("startBtn");
@@ -73,6 +74,7 @@ const difficultySelect = document.getElementById("difficulty");
 let size = 3;
 let puzzle = [];
 
+//PUZZLE CREATION
 function createSolvedPuzzle(size) {
     const arr = [];
     for (let i = 1; i < size * size; i++) {
@@ -118,6 +120,7 @@ function shufflePuzzle() {
     puzzle = shuffled;
 }
 startBtn.addEventListener("click", () => {
+    gameStarted = true;
     moves = 0;
     moveCountEl.textContent = moves;
     document.getElementById("status").textContent = "Playing";
@@ -127,6 +130,10 @@ startBtn.addEventListener("click", () => {
     renderPuzzle();
 });
 resetBtn.addEventListener("click", () => {
+    if(gameStarted == false){
+        alert("Game has not started yet!");
+        return;
+    }
     moves = 0;
     moveCountEl.textContent = moves;
     document.getElementById("status").textContent = "Playing";
@@ -136,7 +143,7 @@ resetBtn.addEventListener("click", () => {
     renderPuzzle();
 });
 
-
+//MOVE LOGIC
 function canMove(tileIndex, emptyIndex) {
     const tileRow = Math.floor(tileIndex / size);
     const tileCol = tileIndex % size;
@@ -190,6 +197,7 @@ function handleTileClick(index) {
     }
 }
 
+// WIN CHECKER
 function getSolvedPuzzle(size) {
     const solved = [];
     for (let i = 1; i < size * size; i++) {
