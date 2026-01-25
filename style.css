@@ -1,63 +1,562 @@
+/* Variables */
+:root {
+    --bg: #f5f7fa;
+    --card: #fff;
+    --text: #1a1a2e;
+    --muted: #6b7280;
+    --tile: #e8ecf1;
+    --tile-hover: #dce1e8;
+    --border: #c9d1dc;
+    --empty: #f0f3f7;
+    --empty-border: #d4dae3;
+    --accent: #4f46e5;
+    --accent-hover: #4338ca;
+    --btn-sec: #e5e7eb;
+    --btn-sec-hover: #d1d5db;
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, .08);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, .1);
+    --radius: 10px;
+}
+
+[data-theme="dark"] {
+    --bg: #0f172a;
+    --card: #1e293b;
+    --text: #f1f5f9;
+    --muted: #94a3b8;
+    --tile: #334155;
+    --tile-hover: #475569;
+    --border: #475569;
+    --empty: #1e293b;
+    --empty-border: #334155;
+    --accent: #818cf8;
+    --accent-hover: #a5b4fc;
+    --btn-sec: #334155;
+    --btn-sec-hover: #475569;
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, .3);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, .4);
+}
+
+/* Base */
 * {
     box-sizing: border-box;
-    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
 }
 
 body {
-    margin: 0;
-    padding: 20px;
-    background-color: #f4f4f4;
+    min-height: 100vh;
+    padding: 30px 20px;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Segoe UI', -apple-system, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: background .3s, color .3s;
+}
+
+/* Header */
+header {
     text-align: center;
+    margin-bottom: 25px;
 }
 
 header h1 {
-    margin-bottom: 5px;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 6px;
+    letter-spacing: -.5px;
+}
+
+header p {
+    font-size: 1rem;
+    color: var(--muted);
+}
+
+/* Layout */
+.game-container {
+    display: flex;
+    gap: 60px;
+    justify-content: center;
+    align-items: flex-start;
+    max-width: 1300px;
+    width: 100%;
+    padding: 0 20px;
+}
+
+.game-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sidebar {
+    width: 260px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    flex-shrink: 0;
+}
+
+.sidebar-card {
+    background: var(--card);
+    padding: 18px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    transition: background .3s;
+}
+
+.sidebar-card h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 14px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 10px;
+}
+
+/* Sidebar Content */
+.best-scores {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.score-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: .9rem;
+    color: var(--muted);
+}
+
+.score-row span:last-child {
+    font-weight: 700;
+    color: var(--accent);
+}
+
+.game-history {
+    list-style: none;
+    max-height: 200px;
+    overflow-y: auto;
+    font-size: .85rem;
+}
+
+.game-history li {
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+    color: var(--muted);
+}
+
+.game-history li:last-child {
+    border-bottom: none;
+}
+
+.game-history .history-win {
+    color: var(--accent);
+}
+
+.history-empty {
+    font-style: italic;
+}
+
+.instructions,
+.tips {
+    padding-left: 18px;
+    font-size: .9rem;
+    color: var(--muted);
+    line-height: 1.6;
+}
+
+.instructions li,
+.tips li {
+    margin-bottom: 10px;
+}
+
+.instructions strong {
+    color: var(--text);
+}
+
+/* Theme Toggle */
+.theme-toggle {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.theme-toggle span {
+    font-size: 1.2rem;
+}
+
+#themeToggle {
+    width: 50px;
+    height: 26px;
+    background: var(--btn-sec);
+    border: none;
+    border-radius: 13px;
+    cursor: pointer;
+    position: relative;
+    transition: background .3s;
+}
+
+#themeToggle::after {
+    content: '';
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 20px;
+    height: 20px;
+    background: var(--accent);
+    border-radius: 50%;
+    transition: transform .3s;
+}
+
+[data-theme="dark"] #themeToggle::after {
+    transform: translateX(24px);
+}
+
+/* Controls & Stats */
+#controls,
+#stats {
+    background: var(--card);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    transition: background .3s;
 }
 
 #controls {
-    margin: 15px 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    padding: 16px 24px;
 }
 
-#controls button,
+#controls label {
+    font-size: .95rem;
+    font-weight: 500;
+    color: var(--muted);
+}
+
 #controls select {
-    padding: 6px 10px;
-    margin: 0 5px;
-    font-size: 14px;
+    padding: 8px 32px 8px 12px;
+    font-size: .95rem;
+    background: var(--bg);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all .2s;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12'%3E%3Cpath fill='%236b7280' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+}
+
+#controls select:hover,
+#controls select:focus {
+    border-color: var(--accent);
+    outline: none;
+}
+
+#controls button {
+    padding: 10px 22px;
+    font-size: .95rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all .2s;
+}
+
+#startBtn {
+    background: var(--accent);
+    color: #fff;
+}
+
+#startBtn:hover {
+    background: var(--accent-hover);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+}
+
+#resetBtn {
+    background: var(--btn-sec);
+    color: var(--text);
+}
+
+#resetBtn:hover {
+    background: var(--btn-sec-hover);
 }
 
 #stats {
-    margin: 10px 0;
     display: flex;
     justify-content: center;
-    gap: 20px;
-    font-weight: bold;
+    gap: 30px;
+    margin-bottom: 25px;
+    padding: 12px 30px;
 }
 
-/* ===== PUZZLE BOARD ===== */
+#stats div {
+    font-size: .95rem;
+    color: var(--muted);
+}
+
+#stats span {
+    color: var(--accent);
+    font-weight: 700;
+}
+
+/* Puzzle */
 #puzzleBoard {
-    margin: 20px auto;
     display: grid;
-    gap: 5px;
+    gap: 6px;
     width: fit-content;
+    padding: 16px;
+    background: var(--card);
+    border-radius: 14px;
+    box-shadow: var(--shadow-md);
+    transition: background .3s;
 }
 
-/* ===== PUZZLE TILE ===== */
 .tile {
-    width: 90px;
-    height: 90px;
-    background-color: #ffffff;
-    border: 2px solid #333;
+    width: 70px;
+    height: 70px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 20px;
-    font-weight: bold;
+    font-size: 1.4rem;
+    font-weight: 700;
     cursor: pointer;
     user-select: none;
+    border-radius: 10px;
+    background: var(--tile);
+    border: 1px solid var(--border);
+    color: var(--text);
+    transition: all .15s;
+    box-shadow: var(--shadow-sm);
+}
+
+.tile:not(.empty):hover {
+    background: var(--tile-hover);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.tile:not(.empty):active {
+    transform: translateY(0);
 }
 
 .tile.empty {
-    background-color: #ccc;
-    border: 2px dashed #999;
+    background: var(--empty);
+    border: 2px dashed var(--empty-border);
+    box-shadow: none;
     cursor: default;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+}
+
+/* Responsive */
+@media(max-width:1100px) {
+    .game-container {
+        gap: 40px;
+    }
+
+    .sidebar {
+        width: 220px;
+    }
+}
+
+@media(max-width:900px) {
+    .game-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 30px;
+    }
+
+    .sidebar {
+        width: 100%;
+        max-width: 500px;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    .sidebar-left {
+        order: 2;
+    }
+
+    .sidebar-right {
+        order: 3;
+    }
+
+    .game-area {
+        order: 1;
+    }
+
+    .sidebar-card {
+        flex: 1;
+        min-width: 200px;
+    }
+}
+
+@media(max-width:600px) {
+    body {
+        padding: 20px 15px;
+    }
+
+    header h1 {
+        font-size: 1.5rem;
+    }
+
+    header p {
+        font-size: .9rem;
+    }
+
+    .theme-toggle {
+        position: static;
+        margin-bottom: 15px;
+    }
+
+    .game-container {
+        gap: 20px;
+        padding: 0 10px;
+    }
+
+    #controls {
+        padding: 12px 16px;
+        gap: 10px;
+    }
+
+    #controls label {
+        display: none;
+    }
+
+    #controls select {
+        padding: 8px 28px 8px 10px;
+        font-size: .9rem;
+    }
+
+    #controls button {
+        padding: 8px 16px;
+        font-size: .9rem;
+    }
+
+    #stats {
+        gap: 20px;
+        padding: 10px 20px;
+    }
+
+    .sidebar {
+        max-width: 100%;
+    }
+
+    .sidebar-card {
+        min-width: 100%;
+        padding: 15px;
+    }
+
+    .sidebar-card h3 {
+        font-size: .95rem;
+    }
+
+    .instructions,
+    .tips {
+        font-size: .85rem;
+    }
+}
+
+@media(max-width:380px) {
+    .tile {
+        width: 50px;
+        height: 50px;
+        font-size: 1rem;
+    }
+
+    #puzzleBoard {
+        padding: 10px;
+        gap: 4px;
+    }
+}
+
+/* Modal */
+#winModal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, .5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    animation: fadeIn .3s;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.modal-content {
+    background: var(--card);
+    padding: 40px 50px;
+    border-radius: 16px;
+    text-align: center;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, .15);
+    animation: slideUp .3s;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.modal-content h2 {
+    font-size: 1.8rem;
+    margin-bottom: 12px;
+}
+
+.modal-content p {
+    font-size: 1.1rem;
+    color: var(--muted);
+    margin-bottom: 25px;
+}
+
+.modal-content strong {
+    color: var(--accent);
+}
+
+#playAgainBtn {
+    padding: 12px 30px;
+    font-size: 1rem;
+    font-weight: 600;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all .2s;
+}
+
+#playAgainBtn:hover {
+    background: var(--accent-hover);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
 }

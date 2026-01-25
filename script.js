@@ -1,3 +1,67 @@
+// ===== THEME TOGGLE =====
+const themeToggle = document.getElementById("themeToggle");
+const savedTheme = localStorage.getItem("theme") || "light";
+document.documentElement.setAttribute("data-theme", savedTheme);
+
+themeToggle.addEventListener("click", () => {
+    const currentTheme = document.documentElement.getAttribute("data-theme");
+    const newTheme = currentTheme === "light" ? "dark" : "light";
+    document.documentElement.setAttribute("data-theme", newTheme);
+    localStorage.setItem("theme", newTheme);
+});
+
+// ===== BEST MOVES & GAME HISTORY =====
+let bestMoves = JSON.parse(localStorage.getItem("bestMoves")) || { 3: null, 4: null };
+let gameHistory = JSON.parse(localStorage.getItem("gameHistory")) || [];
+
+function updateBestMovesDisplay() {
+    document.getElementById("best3x3").textContent = bestMoves[3] !== null ? bestMoves[3] : "--";
+    document.getElementById("best4x4").textContent = bestMoves[4] !== null ? bestMoves[4] : "--";
+}
+
+function updateGameHistoryDisplay() {
+    const historyEl = document.getElementById("gameHistory");
+    if (gameHistory.length === 0) {
+        historyEl.innerHTML = '<li class="history-empty">No games played yet</li>';
+        return;
+    }
+    // Show last 10 games, newest first
+    const recentGames = gameHistory.slice(-10).reverse();
+    historyEl.innerHTML = recentGames.map(game =>
+        `<li class="history-win">${game.difficulty} — ${game.moves} moves</li>`
+    ).join("");
+}
+
+function recordGameWin(difficulty, moveCount) {
+    const diffLabel = difficulty === 3 ? "3×3" : "4×4";
+
+    // Update best moves
+    if (bestMoves[difficulty] === null || moveCount < bestMoves[difficulty]) {
+        bestMoves[difficulty] = moveCount;
+        localStorage.setItem("bestMoves", JSON.stringify(bestMoves));
+    }
+
+    // Add to history
+    gameHistory.push({
+        difficulty: diffLabel,
+        moves: moveCount,
+        date: new Date().toISOString()
+    });
+    // Keep only last 50 games
+    if (gameHistory.length > 50) {
+        gameHistory = gameHistory.slice(-50);
+    }
+    localStorage.setItem("gameHistory", JSON.stringify(gameHistory));
+
+    updateBestMovesDisplay();
+    updateGameHistoryDisplay();
+}
+
+// Initialize displays on load
+updateBestMovesDisplay();
+updateGameHistoryDisplay();
+
+// ===== GAME LOGIC =====
 const moveCountEl = document.getElementById("moveCount");
 let moves = 0;
 
@@ -90,7 +154,7 @@ function swapTiles(tileIndex, emptyIndex) {
 }
 function renderPuzzle() {
     puzzleBoard.innerHTML = "";
-    puzzleBoard.style.gridTemplateColumns = `repeat(${size}, 90px)`;
+    puzzleBoard.style.gridTemplateColumns = `repeat(${size}, 70px)`;
 
     puzzle.forEach((value, index) => {
         const tile = document.createElement("div");
@@ -144,9 +208,40 @@ function isPuzzleSolved() {
 }
 function handleWin() {
     document.getElementById("status").textContent = "Solved!";
+    recordGameWin(size, moves);
     setTimeout(() => {
-        alert(`Puzzle solved in ${moves} moves!`);
-    }, 100)
+        showWinModal();
+    }, 100);
+}
 
+function showWinModal() {
+    // Create modal overlay
+    const overlay = document.createElement("div");
+    overlay.id = "winModal";
+    overlay.innerHTML = `
+        <div class="modal-content">
+            <h2>🎉 Congratulations!</h2>
+            <p>You solved the puzzle in <strong>${moves}</strong> moves!</p>
+            <button id="playAgainBtn">Play Again</button>
+        </div>
+    `;
+    document.body.appendChild(overlay);
 
+    // Play Again button handler
+    document.getElementById("playAgainBtn").addEventListener("click", () => {
+        overlay.remove();
+        moves = 0;
+        moveCountEl.textContent = moves;
+        document.getElementById("status").textContent = "Playing";
+        puzzle = createSolvedPuzzle(size);
+        shufflePuzzle();
+        renderPuzzle();
+    });
+
+    // Close on overlay click
+    overlay.addEventListener("click", (e) => {
+        if (e.target === overlay) {
+            overlay.remove();
+        }
+    });
 }
