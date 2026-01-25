@@ -6,25 +6,9 @@ const startBtn = document.getElementById("startBtn");
 const resetBtn = document.getElementById("resetBtn");
 const difficultySelect = document.getElementById("difficulty");
 
-let size = 3;        
-let puzzle = [];     
-function renderPuzzle() {
-    puzzleBoard.innerHTML = "";
-    puzzleBoard.style.gridTemplateColumns = `repeat(${size}, 90px)`;
-    puzzle.forEach((value, index) => {
-        const tile = document.createElement("div");
-        tile.classList.add("tile");
+let size = 3;
+let puzzle = [];
 
-        if (value === null) {
-            tile.classList.add("empty");
-        } else {
-            tile.textContent = value;
-        }
-
-        tile.dataset.index = index; // store position
-        puzzleBoard.appendChild(tile);
-    });
-}
 function createSolvedPuzzle(size) {
     const arr = [];
     for (let i = 1; i < size * size; i++) {
@@ -33,11 +17,7 @@ function createSolvedPuzzle(size) {
     arr.push(null); // empty tile
     return arr;
 }
-startBtn.addEventListener("click", () => {
-    size = parseInt(difficultySelect.value);
-    puzzle = createSolvedPuzzle(size);
-    renderPuzzle();
-});
+
 function countInversions(arr) {
     let inversions = 0;
 
@@ -164,9 +144,9 @@ function isPuzzleSolved() {
 }
 function handleWin() {
     document.getElementById("status").textContent = "Solved!";
-    setTimeout( () => {
+    setTimeout(() => {
         alert(`Puzzle solved in ${moves} moves!`);
-    },100)
+    }, 100)
 
-    
+
 }
