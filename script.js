@@ -120,6 +120,7 @@ function shufflePuzzle() {
 startBtn.addEventListener("click", () => {
     moves = 0;
     moveCountEl.textContent = moves;
+    document.getElementById("status").textContent = "Playing";
     size = parseInt(difficultySelect.value);
     puzzle = createSolvedPuzzle(size);
     shufflePuzzle();
@@ -128,6 +129,7 @@ startBtn.addEventListener("click", () => {
 resetBtn.addEventListener("click", () => {
     moves = 0;
     moveCountEl.textContent = moves;
+    document.getElementById("status").textContent = "Playing";
     size = parseInt(difficultySelect.value);
     puzzle = createSolvedPuzzle(size);
     shufflePuzzle();
